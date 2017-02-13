@@ -38,3 +38,39 @@ then need to restart the daemon process
 ```
 # systemctl restart sshd
 ```
+
+## Accessing Servers with SSH
+### Configuring the SSH Client
+```
+# ssh user@serverIP
+```
+
+Added 'config' file in user directory's .ssh folder, i.e. `/root/.ssh/`
+```
+Host server1
+  HostName 192.168.56.105
+  User root
+  Post 22 # terminal default
+  
+...
+```
+
+### Using Key Based Authentication
+Generating rsa key
+```
+# ssh-keygen -t rsa
+```
+Transfering public key to the intended server
+```
+# ssh-copy-id -i id_rsa.pub serverName
+```
+
+```
+# ssh-agent bash
+# ssh-add
+```
+
+### Copy Files Securely
+```
+scp /source/file/path serverName:/destination/path
+```
