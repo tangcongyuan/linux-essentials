@@ -3,6 +3,66 @@ Notes from LFCS on Pluralsight
 
 ## Linux Foundation Certified System Administrator (LFCS)
 
+## Installing CentOS 7
+### CentOS Downloads
+### VirtualBox Networking
+Got to File->Preferences->Network and add a NAT network
+Don't forget to add Host-only Adapter as your Adapter 2. I don't know why...
+
+### Configure CentOS 7 Networking
+```
+# ip address show
+# ip a s
+```
+
+Bring network up
+```
+# nmcli conn show
+# nmcli conn up enp0s3
+# nmcli conn up enp0s8
+```
+
+```
+# sed -i s/ONBOOT=no/ONBOOT=yes/ /etc/sysconfig/network-scripts/ifcfg-enp0s3
+# sed -i s/ONBOOT=no/ONBOOT=yes/ /etc/sysconfig/network-scripts/ifcfg-enp0s8
+# grep ONBOOT !$
+```
+
+### Installing X
+Before install, update yum
+```
+# yum update
+```
+
+Common packages
+```
+# yum install -y redhat-lsb-core net-tools epel-release kernel-headers kernel-devel
+```
+
+Group packages
+```
+# yum groupinstall -y "Development Tools"
+```
+
+GUI
+```
+# yum groupinstall -y "X Windows System" "MATE Desktop"
+```
+
+Service management tool, `systemctl`, set run level and switch to GUI
+```
+# systemctl set-default graphical.target
+# systemctl isolate graphical.target
+```
+
+### Add Guest Addtion
+Enhancing VirtualBox experience
+```
+# mount
+# /run/media/username/VBOXADDITIONS_XXXX/VBoxLinuxAdditions.run
+```
+Those commmon packages above will be useful when installing guest additions, and update, and reboot.
+
 ## Accessing the root account
 
 See user's id
