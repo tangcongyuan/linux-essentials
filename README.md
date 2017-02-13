@@ -65,6 +65,7 @@ Transfering public key to the intended server
 # ssh-copy-id -i id_rsa.pub serverName
 ```
 
+Caching credentials and login with keys, not password anymore.
 ```
 # ssh-agent bash
 # ssh-add
