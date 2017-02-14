@@ -179,6 +179,8 @@ $ less /file
 ```
 
 ### Regular Expressions and grep
+ctrl + r to search commands reversely
+
 ```
 $ yum installed | grep ^kernel
 $ grep '\bserver\b' ntp.conf
@@ -271,6 +273,95 @@ After `2yy`, `p` pastes below current line; `P` pates above current line.
 `dG` deletes to the end of file
 
 `d$` deletes to the end of line
+
+## Piping and Redirection
+### Redirecting STDOUT
+1 for STDOUT; `>>` for append
+```
+$ df -h > fileName
+$ df -h 1> fileName
+$ df -h 1>> fileName
+```
+
+### Using the noclobber Option
+Disable overwritting existing file using piping
+```
+$ set -o
+$ set -o noclobber
+$ set -o | grep noclobber
+$ set +o noclobber
+```
+
+Force overwrite
+```
+$ ls >| file
+```
+
+Make this setting to login script
+```
+$ vi .bashrc
+set -o noclobber
+```
+
+### Redirecting STDERR
+```
+$ find /etc -type l 2> err.txt
+$ find /etc -type l &> err.txt
+```
+
+### Reading into STDIN
+```
+$ mail
+$ df -hlT > diskfree
+$ mail -s "Disk Free" eric < diskfree
+$ mail
+& d
+& q
+```
+
+### Using HERE documents
+```
+$ cat > file <<END
+> this is a little
+> file that we can create
+> enven with scripts
+> END
+```
+
+### Command Pipelines
+`|` unnamed pipe
+```
+$ ls | wc -l
+$ head -n1 /etc/passwd
+$ cut -f7 -d: /etc/passwd | sort | uniq | wc -l
+```
+
+### Named Pipes
+Pipe files, inter-process communication
+```
+$ ls -l $(tty)
+$ ls -l /dev/sda
+$ mkfifo mypipe
+$ ls -l !$
+$ls -F !$
+```
+
+From process 1:
+```
+$ ls > mypipe
+```
+
+From process 2
+```
+$ wc -l < mypipe
+```
+
+### Using the Command tee
+Send the output to two locations, both file and STDOUT
+```
+$ ls > file
+$ ls | tee file
+```
 
 ## Accessing the root account
 
