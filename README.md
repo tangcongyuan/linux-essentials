@@ -63,6 +63,111 @@ Enhancing VirtualBox experience
 ```
 Those commmon packages above will be useful when installing guest additions, and update, and reboot.
 
+## Working at the Command Line
+### Accessing Consoles
+Right ctr + F1 takes you to the first tty, which is the GUI
+Right ctr + F2 takes you to the second tty, which is the physical terminal
+```
+$ tty
+$ who
+```
+
+### Listing Files
+See `ls` with alias
+```
+$ type ls
+```
+
+r-reverse; t-timestamp; h-human readable; d-directory
+```
+$ ls -lrth
+```
+
+### File Types
+Charactor device/tty
+```
+$ ls -l $(tty)
+```
+
+Block device, disk and partitions
+```
+$ lsblk
+$ ls -l /dev/sda*
+$ ls -l /dev/sda?
+```
+
+Link
+```
+$ ls -l /etc/centos-release /etc/redhat-release
+```
+
+Executable(package manager queries file)
+```
+$ ls -l $(which lsb_release)
+$ rpm -qf $(which lsb_release)
+```
+
+### Working with Files
+Prevent overwriting file when exists(with interactive mode)
+```
+cp -i /source/file /destination/file
+rm -i /file/path
+```
+
+### Working with Directories
+Make parent directory before make the designated child directory
+```
+$ mkdir -p /parent/child
+```
+
+Make directory with specific mode
+```
+$ mkdir -m 777 /dir
+```
+
+Remove directory
+```
+$ rmdir /directory
+$ rm -rf /directory
+```
+
+Copying directory, or files in directory
+```
+$ cp -R /source/dir /destination/dir
+```
+
+Install tree helps visualize directories
+```
+# yum install tree
+$ tree /dir
+```
+
+### Working with links
+Check meta-data: the entry of a file
+```
+$ ls -i /file
+```
+
+At least two hard links for one dir
+```
+$ ls -ldi /dir
+```
+
+And doc dir links to dir itself
+```
+$ ls -ldi /dir /dir/.
+```
+
+Hard link
+```
+$ ln /source/file /destination/file
+```
+
+Symbolic link, can cross file system boundries
+```
+$ ln -s /source/file /destination/file
+```
+
 ## Accessing the root account
 
 See user's id
