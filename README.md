@@ -205,7 +205,7 @@ $ diff file1 file2
 $ md5sum /usr/bin/passwd
 ```
 
-## Finding Files
+### Finding Files
 ```
 $ find /usr/share/doc -name '*.pdf' -exec cp {} . \;
 $ find -name '*.pdf' -delete
@@ -213,6 +213,64 @@ $ find /etc -maxdepth 1 -type l
 $ df -h /boot
 $ find /boot -size +20000k -type f -exec du -h {} \;
 ```
+
+## Using the vim Text Editor
+### Using the nano Text Editor
+```
+$ sudo yum install -y nano
+```
+
+### Learning vim with vimtutor
+```
+$ vimtutor
+```
+
+### Setting Defaults with .vimrc
+```
+:set showmode
+:set number
+:set nonumber
+:set invnumber
+```
+
+Set no highlight search and auto indent
+```
+$ vi .vimrc
+set showmode nonumber nohlsearch
+set ai ts=4 expandtab
+abbr _sh #!/bin/bash
+nmap <C-N> :set invnumber<CR>
+:wq
+```
+
+Return to last saved change
+```
+:e!
+```
+
+### Editing Files with vim
+Lower case `o` inserts below current line
+
+Upper case `O` inserts above current line
+
+Upper case `I` inserts start of line
+
+Upper case `A` inserts end of line
+```
+G
+2G
+```
+After `2yy`, `p` pastes below current line; `P` pates above current line.
+
+`u` undo
+
+`^` moves to the beginning of line
+
+`$` moves to the end of line
+
+`dG` deletes to the end of file
+
+`d$` deletes to the end of line
 
 ## Accessing the root account
 
