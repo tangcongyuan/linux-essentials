@@ -66,6 +66,7 @@ Those commmon packages above will be useful when installing guest additions, and
 ## Working at the Command Line
 ### Accessing Consoles
 Right ctr + F1 takes you to the first tty, which is the GUI
+
 Right ctr + F2 takes you to the second tty, which is the physical terminal
 ```
 $ tty
@@ -166,6 +167,51 @@ $ ln /source/file /destination/file
 Symbolic link, can cross file system boundries
 ```
 $ ln -s /source/file /destination/file
+```
+
+## Reading Files
+### Reading from Files
+```
+$ head -n 3 /etc/services
+$ tail -n 3 /etc/passwd
+$ cat /file
+$ less /file
+```
+
+### Regular Expressions and grep
+```
+$ yum installed | grep ^kernel
+$ grep '\bserver\b' ntp.conf
+$ grep -E 'ion$' /usr/share/dict/words
+$ grep -E '^po..ute$' /usr/share/dict/words
+$ grep -E '[aeiou]{5}' /usr/share/dict/words
+```
+
+### Using sed to Edit Files
+```
+$ sed -i '/^#/d ; /^$/d' ntp.conf
+```
+
+```
+$ function clean_file {
+> sed -i '/^#/d;/^$/d' $1
+> }
+$ clean_file ntp.conf
+```
+
+### Comparing Files
+```
+$ diff file1 file2
+$ md5sum /usr/bin/passwd
+```
+
+## Finding Files
+```
+$ find /usr/share/doc -name '*.pdf' -exec cp {} . \;
+$ find -name '*.pdf' -delete
+$ find /etc -maxdepth 1 -type l
+$ df -h /boot
+$ find /boot -size +20000k -type f -exec du -h {} \;
 ```
 
 ## Accessing the root account
