@@ -153,7 +153,7 @@ At least two hard links for one dir
 $ ls -ldi /dir
 ```
 
-And doc dir links to dir itself
+And dot dir links to dir itself
 ```
 $ ls -ldi /dir /dir/.
 ```
