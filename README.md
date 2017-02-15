@@ -411,11 +411,31 @@ Erase your disk with `dd`
 # dd if=sda.mbr of=/dev/sda
 ```
 
-## Accessing the root account
+## Understand File Permissions
+### Managing File ownership
+Default group will be `$ id -gn` and used when creating files
 
+Secondary group `$ id -Gn` related to accessing files
+```
+$ chgrp wheel fileName
+$ newgrp wheel
+$ touch newFile
+# chown eric.eric newFile
+```
+
+Remain files ownership and timestamp
+```
+# cp -a fileName /destination/path
+```
+
+## Accessing the root account
 See user's id
 ```
 $ id
+$ id -u
+$ id -un
+$ id -gn
+$ id -Gn
 ```
 
 ### Using su
@@ -483,3 +503,38 @@ Caching credentials and login with keys, not password anymore.
 ```
 scp /source/file/path serverName:/destination/path
 ```
+
+## Using screen and script
+### Using script as a Collaboration Tool
+Default file created called: *typescript*
+```
+$ script
+... recording starts until exit
+```
+
+Monitor the pipe, enables others see your action.
+```
+$ script -f /tmp/mypipe
+```
+
+### Running Commands Across Your Estate with screen
+`t`: title
+```
+# yum install -y screen
+$ vi .screenrc
+  screen -t master 0 bash
+  screen -t s1 1 ssh server1
+  screen -t s2 2 ssh server2
+:wq
+```
+`ctrl + a n`: Next screen
+
+`ctrl + a p`: Previous screen
+
+`ctrl + a "`: List all screen
+
+`ctrl + a :` then
+```
+at "#" stuff "yum install -y zsh^M"
+```
+will run `yum install -y zsh` in all screens.
