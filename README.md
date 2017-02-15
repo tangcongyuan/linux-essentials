@@ -363,6 +363,54 @@ $ ls > file
 $ ls | tee file
 ```
 
+## Archiving Files
+### Using the tar Command
+The -s (for suppress or summarize) option tells `du` to report only the total disk space occupied by a directory tree and to suppress individual reports for its subdirectories.
+
+`c`: create, `v`: verbose, `f`: file, `t`: test, `x`: extract
+```
+$ du -sh .
+$ tar -cvf /tmp/$USER.tar $HOME
+$ tar -tf /tmp/$USER.tar
+$ tar -xvf /tmp/$USER.tar /destination/path
+```
+
+### Using Compression
+```
+$ gzip /tmp/USER.tar
+$ gunzip /tmp/USER.tar
+$ bzip2 /tmp/USER.tar
+$ bunzip2 /tmp/USER.tar
+```
+
+`z`: gzip, `j`: bzip2. gzip is faster.
+```
+$ tar -cvzf /tmp/$USER.tar.gz
+$ tar -cvjf /tmp/$USER.tar.bz2
+```
+
+### Working with cpio
+```
+$ find /usr/share/doc -name '*.pdf' | cpio -o > /tmp/pdf.cpio
+$ cpio -id < /tmp/pdf.cpio
+$ cpio -id 
+```
+
+### Imaging with dd
+Disk Duplicator
+```
+$ dd if=/dev/sr0 of=image.iso
+$ sudo dd if=/dev/sda1 of=boot.iso
+```
+
+Erase your disk with `dd`
+```
+# fdisk -l
+# dd if=/dev/sda of=sda.mbr count=1 bs=512
+# dd if=/dev/zero of=/dev/sda count=1 bs=512
+# dd if=sda.mbr of=/dev/sda
+```
+
 ## Accessing the root account
 
 See user's id
